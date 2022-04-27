@@ -1,0 +1,7 @@
+model: transh
+ax_search:
+  parameters:
+    - name: transh.l_norm
+      type: choice
+      values: [1., 2.]
+      is_ordered: True

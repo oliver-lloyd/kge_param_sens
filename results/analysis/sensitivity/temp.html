@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "batch size", "label": "batch size", "shape": "dot", "size": 1.8186576620968}, {"id": "initial learning rate", "label": "initial learning rate", "shape": "dot", "size": 63.61957763333639}, {"id": "learning rate reduction patience", "label": "learning rate reduction patience", "shape": "dot", "size": 6.2669872992769005}, {"id": "embedding dimension no.", "label": "embedding dimension no.", "shape": "dot", "size": 24.9550289544375}, {"id": "standard dev. of normal weight init.", "label": "standard dev. of normal weight init.", "shape": "dot", "size": 5.7298933842633}, {"id": "lower bound of uniform weight init", "label": "lower bound of uniform weight init", "shape": "dot", "size": 19.78989680752645}, {"id": "weight regularisation y/n", "label": "weight regularisation y/n", "shape": "dot", "size": 4.710804603376}, {"id": "training method: 1vsAll", "label": "training method: 1vsAll", "shape": "dot", "size": 3.0094763625208496}, {"id": "training method: KvsAll", "label": "training method: KvsAll", "shape": "dot", "size": 0.7554848055742}, {"id": "training method: negative sampling", "label": "training method: negative sampling", "shape": "dot", "size": 10.7645294105786}, {"id": "gradient descent: Adagrad", "label": "gradient descent: Adagrad", "shape": "dot", "size": 18.766836411083748}, {"id": "gradient descent: Adam", "label": "gradient descent: Adam", "shape": "dot", "size": 20.1633174312428}, {"id": "weight init.: normal", "label": "weight init.: normal", "shape": "dot", "size": 1.54627961481545}, {"id": "weight init.: uniform", "label": "weight init.: uniform", "shape": "dot", "size": 15.4702245083522}, {"id": "weight init.:xavier normal", "label": "weight init.:xavier normal", "shape": "dot", "size": 4.53170421296755}, {"id": "weight init.: xavier uniform", "label": "weight init.: xavier uniform", "shape": "dot", "size": 0.7258422927488}, {"id": "loss function: BCE", "label": "loss function: BCE", "shape": "dot", "size": 83.29922733418731}, {"id": "loss function: KL", "label": "loss function: KL", "shape": "dot", "size": -1.0425228945051}, {"id": "loss function: margin ranking", "label": "loss function: margin ranking", "shape": "dot", "size": 64.01968597698506}]);
+        edges = new vis.DataSet([{"from": "training method: 1vsAll", "to": "training method: KvsAll", "value": 0.00022354797306469424}, {"from": "training method: 1vsAll", "to": "training method: negative sampling", "value": 0.00042589873424088247}, {"from": "training method: 1vsAll", "to": "gradient descent: Adagrad", "value": 0.00011348470539879531}, {"from": "training method: 1vsAll", "to": "gradient descent: Adam", "value": 0.00015666102011985717}, {"from": "training method: 1vsAll", "to": "weight init.: normal", "value": 0.00013859392228858804}, {"from": "training method: 1vsAll", "to": "weight init.: uniform", "value": 0.000137122999376456}, {"from": "training method: 1vsAll", "to": "weight init.:xavier normal", "value": 0.00010782941595933273}, {"from": "training method: 1vsAll", "to": "weight init.: xavier uniform", "value": 9.143103360032607e-05}, {"from": "training method: 1vsAll", "to": "loss function: BCE", "value": 0.0001490145109178227}, {"from": "training method: 1vsAll", "to": "loss function: KL", "value": 6.281377213580046e-05}, {"from": "training method: 1vsAll", "to": "loss function: margin ranking", "value": 0.0001256381183844128}, {"from": "training method: KvsAll", "to": "training method: negative sampling", "value": 2.4076373689652255e-05}, {"from": "training method: KvsAll", "to": "gradient descent: Adagrad", "value": 2.695214264560798e-06}, {"from": "training method: KvsAll", "to": "gradient descent: Adam", "value": 1.7235910706025626e-06}, {"from": "training method: KvsAll", "to": "weight init.: normal", "value": 4.7496191998103955e-06}, {"from": "training method: KvsAll", "to": "weight init.: uniform", "value": 1.803232735570465e-05}, {"from": "training method: KvsAll", "to": "weight init.:xavier normal", "value": 3.8429118768600005e-07}, {"from": "training method: KvsAll", "to": "weight init.: xavier uniform", "value": 1.8919866718836757e-06}, {"from": "training method: KvsAll", "to": "loss function: BCE", "value": 6.69564230056272e-07}, {"from": "training method: KvsAll", "to": "loss function: KL", "value": 6.341014382815845e-08}, {"from": "training method: KvsAll", "to": "loss function: margin ranking", "value": 9.32189872443565e-08}, {"from": "training method: negative sampling", "to": "gradient descent: Adagrad", "value": 0.00012053580998411449}, {"from": "training method: negative sampling", "to": "gradient descent: Adam", "value": 7.184139815772494e-05}, {"from": "training method: negative sampling", "to": "weight init.: normal", "value": 8.157434258351989e-05}, {"from": "training method: negative sampling", "to": "weight init.: uniform", "value": 8.493195745583341e-05}, {"from": "training method: negative sampling", "to": "weight init.:xavier normal", "value": 0.00011162349005029282}, {"from": "training method: negative sampling", "to": "weight init.: xavier uniform", "value": 8.616308938229351e-05}, {"from": "training method: negative sampling", "to": "loss function: BCE", "value": 7.37531628383099e-06}, {"from": "training method: negative sampling", "to": "loss function: KL", "value": 7.821318626126451e-06}, {"from": "training method: negative sampling", "to": "loss function: margin ranking", "value": 5.2695503860839195e-06}, {"from": "gradient descent: Adagrad", "to": "gradient descent: Adam", "value": 0.0022703457720905647}, {"from": "gradient descent: Adagrad", "to": "weight init.: normal", "value": 1.215465219481222e-05}, {"from": "gradient descent: Adagrad", "to": "weight init.: uniform", "value": 3.21099263427464e-09}, {"from": "gradient descent: Adagrad", "to": "weight init.:xavier normal", "value": 3.9393163187239865e-05}, {"from": "gradient descent: Adagrad", "to": "weight init.: xavier uniform", "value": 6.49932501269208e-06}, {"from": "gradient descent: Adagrad", "to": "loss function: BCE", "value": 5.370266704529015e-05}, {"from": "gradient descent: Adagrad", "to": "loss function: KL", "value": 0.00015439201162650054}, {"from": "gradient descent: Adagrad", "to": "loss function: margin ranking", "value": 3.662598898484899e-05}, {"from": "gradient descent: Adam", "to": "weight init.: normal", "value": 1.2618284177020012e-05}, {"from": "gradient descent: Adam", "to": "weight init.: uniform", "value": 9.229812905255599e-06}, {"from": "gradient descent: Adam", "to": "weight init.:xavier normal", "value": 5.457597795405631e-05}, {"from": "gradient descent: Adam", "to": "weight init.: xavier uniform", "value": 4.765704777492047e-05}, {"from": "gradient descent: Adam", "to": "loss function: BCE", "value": 7.618153083121398e-06}, {"from": "gradient descent: Adam", "to": "loss function: KL", "value": 4.464327066215155e-05}, {"from": "gradient descent: Adam", "to": "loss function: margin ranking", "value": 1.6684397047633963e-05}, {"from": "weight init.: normal", "to": "weight init.: uniform", "value": 0.00013816797973400838}, {"from": "weight init.: normal", "to": "weight init.:xavier normal", "value": 4.307666153276226e-05}, {"from": "weight init.: normal", "to": "weight init.: xavier uniform", "value": 3.0117909540867935e-05}, {"from": "weight init.: normal", "to": "loss function: BCE", "value": 3.413986508579286e-05}, {"from": "weight init.: normal", "to": "loss function: KL", "value": 2.7800912991156175e-05}, {"from": "weight init.: normal", "to": "loss function: margin ranking", "value": 1.762874091409211e-05}, {"from": "weight init.: uniform", "to": "weight init.:xavier normal", "value": 3.072656775033398e-05}, {"from": "weight init.: uniform", "to": "weight init.: xavier uniform", "value": 1.309217491401832e-05}, {"from": "weight init.: uniform", "to": "loss function: BCE", "value": 2.270612257103354e-06}, {"from": "weight init.: uniform", "to": "loss function: KL", "value": 1.4907607844578715e-05}, {"from": "weight init.: uniform", "to": "loss function: margin ranking", "value": 5.446146420530275e-06}, {"from": "weight init.:xavier normal", "to": "weight init.: xavier uniform", "value": 3.376215786456014e-06}, {"from": "weight init.:xavier normal", "to": "loss function: BCE", "value": 2.0957205077807532e-05}, {"from": "weight init.:xavier normal", "to": "loss function: KL", "value": 1.5511501126184224e-05}, {"from": "weight init.:xavier normal", "to": "loss function: margin ranking", "value": 1.76245064555411e-05}, {"from": "weight init.: xavier uniform", "to": "loss function: BCE", "value": 1.1395460894088392e-06}, {"from": "weight init.: xavier uniform", "to": "loss function: KL", "value": 1.4971367067715758e-05}, {"from": "weight init.: xavier uniform", "to": "loss function: margin ranking", "value": 7.35123831811757e-07}, {"from": "loss function: BCE", "to": "loss function: KL", "value": 0.0018600996276969999}, {"from": "loss function: BCE", "to": "loss function: margin ranking", "value": 0.006979829839861051}, {"from": "loss function: KL", "to": "loss function: margin ranking", "value": 0.0009843365215027467}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

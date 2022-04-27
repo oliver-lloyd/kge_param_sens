@@ -1,0 +1,7 @@
+model: rotate
+ax_search:
+  parameters:
+    - name: rotate.l_norm
+      type: choice
+      values: [1., 2.]
+      is_ordered: True

@@ -1,0 +1,7 @@
+predicate,inverse,inverse_proportion,dataset
+derivative_of,contains,1.0,umls
+derivative_of,surrounds,1.0,umls
+precedes,affects,0.8421052631578947,umls
+degree_of,affects,0.8148148148148148,umls
+precedes,result_of,0.7894736842105263,umls
+/location/administrative_division/first_level_division_of,/location/location/contains,0.8794326241134752,fb15k-237
