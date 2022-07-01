@@ -1,0 +1,10 @@
+name,type,values,is_ordered,log_scale,description
+"Batch size",choice,"[128, 256, 512, 1024]",True,False,"Number of training examples used in one epoch"
+"Gradient descent algorithm",choice,"['Adam', 'Adagrad']",False,False,"Method for finding the minima of a loss function"
+"Initial learning rate",range,"[0.0003, 1.0]",False,True,"Starting value for learning rate, before any scheduling effects"
+"Patience of learning rate scheduler",range,"[0, 10]",False,False,"Number of epochs with plauteauing evaluation before learning rate is reduced"
+"Number of embedding dimensions",choice,"[16, 32, 64, 128, 256, 512]",True,False,"Size of the embedding space"
+"Weight initialisation method",choice,"['xavier_normal_', 'xavier_uniform_', 'normal_', 'uniform_']",False,False,"Approach taken to initialise the embedding values"
+"Std. of 'normal' weight initialisation method",range,"[1e-05, 1.0]",False,True,"Standard deviation of the distribution"
+"Alpha of 'uniform' weight initialisation method",range,"[-1.0, -1e-05]",False,False,"Lower bound of the uniform weight initialisation (upper bound fixed at 1)"
+"Weight regularisation",choice,"[True, False]",False,False,"Whether or not regularisation is applied to penalise large weights that may cause overfitting"
